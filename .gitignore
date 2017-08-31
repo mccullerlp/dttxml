@@ -1,0 +1,17 @@
+venv/
+*.egg-info/
+build/
+dist/
+site/
+
+TAGS
+.cache
+core.*
+
+*.syncthing.*
+*sync-conflict*
+*.pyc
+*.swp
+.*.swp
+.#*
+
