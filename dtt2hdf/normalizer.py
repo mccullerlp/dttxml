@@ -33,7 +33,7 @@ class DiagToDictNormalizer(declarative.OverridableObject):
         except Exception:
             raise DiagFileError("Diag File malformed (xml syntax error)")
         def insert_refs(dbunch):
-            for k, v in daccess.references.iteritems():
+            for k, v in daccess.references.items():
                 dbunch.REFS[str(k)] = v
 
         Achns, Bchns = daccess.channels()
