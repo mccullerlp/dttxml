@@ -89,6 +89,7 @@ def read_diaggui(diag_file):
                 references[ref_num] = ref
             elif typename == "TimeSeries":
                 ref = parse_timeseries(xml_node)
+                references[ref_num] = ref
         match_ref = re.match(r'Result\[(\d+)\]', xml_node.attrib['Name'])
         if match_ref:
             ref_num = int(match_ref.group(1))
