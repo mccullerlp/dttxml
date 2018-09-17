@@ -33,7 +33,7 @@ class DiagToDictNormalizer(declarative.OverridableObject):
         except Exception:
             raise DiagFileError("Diag File malformed (xml syntax error)")
         def insert_refs(dbunch):
-            for k, v in daccess.references.iteritems():
+            for k, v in daccess.references.items():
                 dbunch.REFS[str(k)] = v
 
         Achns, Bchns = daccess.channels()
@@ -47,6 +47,8 @@ class DiagToDictNormalizer(declarative.OverridableObject):
         #PSD type
         xsd_current = None
         xsd_prev    = None
+        xfer_current = None
+        xfer_prev    = None
         for idx_A in range(len(allchns_raw)):
             chn_A_raw = allchns_raw[idx_A]
             if chn_A_raw in self.channels_exclude:
@@ -75,8 +77,10 @@ class DiagToDictNormalizer(declarative.OverridableObject):
                         continue
                 if channels is not None and chn_B not in channels:
                     continue
+
                 if chn_B in self.channels_exclude:
                     continue
+
                 if self.verbose:
                     print(chn_A, chn_B)
                 if chn_A == chn_B:
@@ -107,23 +111,30 @@ class DiagToDictNormalizer(declarative.OverridableObject):
                         if self.verbose:
                             print("GOOD: ", chn_A, chn_B)
                     except KeyError:
+                        pass
+
+                    try:
+                        chn_A_dict = spectra_bunch.XFER.setdefault(chn_A, {})
+                        xfer_current = daccess.xfer(chn_A_raw, chn_B_raw)
+                        value = xfer_current.xfer
+                        prev = chn_A_dict.setdefault(chn_B, value)
+                        if prev is not value:
+                            if not all(prev == value):
+                                warnings.warn((
+                                    "Multiple Mappings from raw to real channel are not consistent for XFER between chns: {0} and {1}"
+                                ).format(chn_A, chn_B)
+                                )
+                    except KeyError:
+                        print("BAD: ", chn_A, chn_B)
                         continue
+
                     chn_A_dict = spectra_bunch.COH.setdefault(chn_A, {})
                     value = daccess.coh(chn_A_raw, chn_B_raw).coh
                     prev = chn_A_dict.setdefault(chn_B, value)
                     if prev is not value:
                         if not all(prev == value):
                             warnings.warn((
-                                "Multiple Mappings from raw to real channel are not consistent for CSD between chns: {0} and {1}"
-                            ).format(chn_A, chn_B)
-                            )
-                    chn_A_dict = spectra_bunch.XFER.setdefault(chn_A, {})
-                    value = daccess.xfer(chn_A_raw, chn_B_raw).xfer
-                    prev = chn_A_dict.setdefault(chn_B, value)
-                    if prev is not value:
-                        if not all(prev == value):
-                            warnings.warn((
-                                "Multiple Mappings from raw to real channel are not consistent for CSD between chns: {0} and {1}"
+                                "Multiple Mappings from raw to real channel are not consistent for COH between chns: {0} and {1}"
                             ).format(chn_A, chn_B)
                             )
                     chn_A_dict = spectra_bunch.XFER_SNR_EST.setdefault(chn_A, {})
@@ -133,12 +144,16 @@ class DiagToDictNormalizer(declarative.OverridableObject):
                     if prev is not value:
                         if not all(prev == value):
                             warnings.warn((
-                                "Multiple Mappings from raw to real channel are not consistent for CSD between chns: {0} and {1}"
+                                "Multiple Mappings from raw to real channel are not consistent for XFER_SNR_EST between chns: {0} and {1}"
                             ).format(chn_A, chn_B)
                             )
                 if xsd_prev is not None:
                     xsd_prev.metadata_check(xsd_current)
                 xsd_prev = xsd_current
+
+                if xfer_prev is not None:
+                    xfer_prev.metadata_check(xfer_current)
+                xfer_prev = xfer_current
 
         if xsd_current is not None:
             spectra_bunch.gps_second   = xsd_current.gps_second,
@@ -146,6 +161,14 @@ class DiagToDictNormalizer(declarative.OverridableObject):
             spectra_bunch.averages     = xsd_current.averages,
             spectra_bunch.BW           = xsd_current.BW,
             spectra_bunch.FHz          = xsd_current.FHz,
+            insert_refs(spectra_bunch)
+            return spectra_bunch
+        if xfer_current is not None:
+            spectra_bunch.gps_second   = xfer_current.gps_second,
+            #spectra_bunch.window       = xfer_current.window,
+            spectra_bunch.averages     = xfer_current.averages,
+            #spectra_bunch.BW           = xfer_current.BW,
+            spectra_bunch.FHz          = xfer_current.FHz,
             insert_refs(spectra_bunch)
             return spectra_bunch
 
