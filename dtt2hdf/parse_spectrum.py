@@ -70,7 +70,7 @@ def parse_spectrum(LW_node):
 
     if subtype_raw == 0:
         specbunch.subtype = 'FFT in format (Y)'
-        data = np.frombuffer(streambuff, dtype='c8').conjugate()
+        data = np.frombuffer(streambuff, dtype='c8')
         specbunch.FHz = np.linspace(specbunch.f0, specbunch.f0 + specbunch.df*N, N)
         specbunch.type_name = 'FFT'
         specbunch.FFT = data.reshape(M, -1)
@@ -83,7 +83,7 @@ def parse_spectrum(LW_node):
     elif subtype_raw == 2:
         specbunch.subtype = 'cross-power spectrum in format (Y)'
         specbunch.type_name = 'CSD'
-        data = np.frombuffer(streambuff, dtype='c8').conjugate()
+        data = np.frombuffer(streambuff, dtype='c8')
         specbunch.FHz = np.linspace(specbunch.f0, specbunch.f0 + specbunch.df*N, N)
         specbunch.CSD = data.reshape(M, -1)
     elif subtype_raw == 3:
@@ -95,7 +95,7 @@ def parse_spectrum(LW_node):
     elif subtype_raw == 4:
         specbunch.subtype = 'FFT in format (f, Y)'
         specbunch.type_name = 'FFT'
-        data = np.frombuffer(streambuff, dtype='c8').conjugate()
+        data = np.frombuffer(streambuff, dtype='c8')
         specbunch.FHz = data[:N]
         specbunch.FFT = data[N:].reshape(M, -1)
     elif subtype_raw == 5:
@@ -107,7 +107,7 @@ def parse_spectrum(LW_node):
     elif subtype_raw == 6:
         specbunch.subtype = 'cross-power spectrum in format (f,Y)'
         specbunch.type_name = 'CSD'
-        data = np.frombuffer(streambuff, dtype='c8').conjugate()
+        data = np.frombuffer(streambuff, dtype='c8')
         specbunch.FHz = data[:N].real
         specbunch.CSD = data[N:].reshape(M, -1)
     elif subtype_raw == 7:

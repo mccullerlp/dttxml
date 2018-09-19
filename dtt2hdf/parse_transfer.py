@@ -74,12 +74,12 @@ def parse_transfer(LW_node):
     if specbunch.subtype_raw == 0:
         specbunch.subtype = 'transfer function B/A in format (Y)'
         specbunch.type_name = 'TF'
-        data = np.frombuffer(streambuff, dtype='c8').conjugate()
+        data = np.frombuffer(streambuff, dtype='c8')
         specbunch.xfer = data.reshape(M, -1)
     elif specbunch.subtype_raw == 1:
         specbunch.subtype = 'transfer function A in format (Y)'
         specbunch.type_name = 'STF'
-        data = np.frombuffer(streambuff, dtype='c8').conjugate()
+        data = np.frombuffer(streambuff, dtype='c8')
         specbunch.response = data.reshape(M, -1)
     elif specbunch.subtype_raw == 2:
         specbunch.subtype = 'coherence B/A in format (Y)'
@@ -88,14 +88,14 @@ def parse_transfer(LW_node):
         specbunch.coherence = data.reshape(M, -1)
     elif specbunch.subtype_raw == 3:
         specbunch.subtype = 'transfer function B/A in format (f,Y)'
-        data = np.frombuffer(streambuff, dtype='c8').conjugate()
+        data = np.frombuffer(streambuff, dtype='c8')
         specbunch.type_name = 'TF'
         specbunch.FHz = data[:N].real
         specbunch.xfer = data[N:].reshape(M, -1)
     elif specbunch.subtype_raw == 4:
         specbunch.subtype = 'transfer function A in format (f,Y)'
         specbunch.type_name = 'STF'
-        data = np.frombuffer(streambuff, dtype='c8').conjugate()
+        data = np.frombuffer(streambuff, dtype='c8')
         specbunch.FHz = data[:N].real
         specbunch.response = data[N:].reshape(M, -1)
     elif specbunch.subtype_raw == 5:
