@@ -160,15 +160,15 @@ class DiagToDictNormalizer(declarative.OverridableObject):
             spectra_bunch.window       = xsd_current.window,
             spectra_bunch.averages     = xsd_current.averages,
             spectra_bunch.BW           = xsd_current.BW,
-            spectra_bunch.FHz          = xsd_current.FHz,
+            spectra_bunch.FHz          = xsd_current.FHz.squeeze(),
             insert_refs(spectra_bunch)
             return spectra_bunch
-        if xfer_current is not None:
+        elif xfer_current is not None:
             spectra_bunch.gps_second   = xfer_current.gps_second,
             #spectra_bunch.window       = xfer_current.window,
             spectra_bunch.averages     = xfer_current.averages,
             #spectra_bunch.BW           = xfer_current.BW,
-            spectra_bunch.FHz          = xfer_current.FHz,
+            spectra_bunch.FHz          = xfer_current.FHz.squeeze(),
             insert_refs(spectra_bunch)
             return spectra_bunch
 
@@ -210,10 +210,10 @@ class DiagToDictNormalizer(declarative.OverridableObject):
                         ).format(chn_A)
                         )
         if ts_current is not None:
-            gps_second    = ts_current.gps_second,
-            time_delay_s  = ts_current.time_delay_s,
-            avgtype       = ts_current.avgtype,
-            dt            = ts_current.dt,
+            TS_bunch.gps_second    = ts_current.gps_second,
+            TS_bunch.time_delay_s  = ts_current.time_delay_s,
+            TS_bunch.avgtype       = ts_current.avgtype,
+            TS_bunch.dt            = ts_current.dt,
             insert_refs(TS_bunch)
             return TS_bunch
         else:
