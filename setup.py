@@ -4,11 +4,13 @@ from __future__ import (absolute_import, division, print_function)
 import os
 import sys
 from distutils.sysconfig import get_python_lib
+import setup_helper
 
 from setuptools import find_packages, setup
 
 
-version = '1.0.0.dev1'
+version = '1.0.1'
+cmdclass = setup_helper.version_checker(version, 'dtt2hdf')
 
 
 setup(
@@ -20,7 +22,7 @@ setup(
     description=(
         'Extract data from LIGO Diagnostics test tools XML format.'
     ),
-    license='Apache v2',
+    license = 'Apache v2',
     packages=find_packages(exclude=['doc']),
     #include_package_data=True,
     #scripts=[''],
@@ -31,8 +33,9 @@ setup(
     install_requires=[
         'declarative[hdf]',
     ],
-    extras_require={},
-    zip_safe=False,
+    cmdclass       = cmdclass,
+    extras_require = {},
+    zip_safe       = False,
     keywords = 'LIGO diagnostics file reader',
     classifiers=[
         'License :: OSI Approved :: Apache Software License',
