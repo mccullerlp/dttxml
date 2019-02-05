@@ -4,6 +4,7 @@ MANIFEST.in
 README.md
 setup.cfg
 setup.py
+setup_helper.py
 dtt2hdf/__init__.py
 dtt2hdf/access.py
 dtt2hdf/diag_clear.py
