@@ -71,26 +71,26 @@ def parse_spectrum(LW_node):
     if subtype_raw == 0:
         specbunch.subtype = 'FFT in format (Y)'
         data = np.frombuffer(streambuff, dtype='c8')
-        specbunch.FHz = np.linspace(specbunch.f0, specbunch.f0 + specbunch.df*N, N)
+        specbunch.FHz = np.linspace(specbunch.f0, specbunch.f0 + specbunch.df*(N-1), N)
         specbunch.type_name = 'FFT'
         specbunch.FFT = data.reshape(M, -1)
     elif subtype_raw == 1:
         specbunch.subtype = 'power spectral density in format (Y)'
         specbunch.type_name = 'PSD'
         data = np.frombuffer(streambuff, dtype='f4')
-        specbunch.FHz = np.linspace(specbunch.f0, specbunch.f0 + specbunch.df*N, N)
+        specbunch.FHz = np.linspace(specbunch.f0, specbunch.f0 + specbunch.df*(N-1), N)
         specbunch.PSD = data.reshape(M, -1)
     elif subtype_raw == 2:
         specbunch.subtype = 'cross-power spectrum in format (Y)'
         specbunch.type_name = 'CSD'
         data = np.frombuffer(streambuff, dtype='c8')
-        specbunch.FHz = np.linspace(specbunch.f0, specbunch.f0 + specbunch.df*N, N)
+        specbunch.FHz = np.linspace(specbunch.f0, specbunch.f0 + specbunch.df*(N-1), N)
         specbunch.CSD = data.reshape(M, -1)
     elif subtype_raw == 3:
         specbunch.subtype = 'coherence in format (Y)'
         specbunch.type_name = 'COH'
         data = np.frombuffer(streambuff, dtype='f4')
-        specbunch.FHz = np.linspace(specbunch.f0, specbunch.f0 + specbunch.df*N, N)
+        specbunch.FHz = np.linspace(specbunch.f0, specbunch.f0 + specbunch.df*(N-1), N)
         specbunch.coherence = data.reshape(M, -1)
     elif subtype_raw == 4:
         specbunch.subtype = 'FFT in format (f, Y)'
