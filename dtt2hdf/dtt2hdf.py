@@ -71,7 +71,7 @@ def main(args = None):
 
     #write the file out, it is cleared first due to the 'w' flag. Could do this using append operations with 'a'
     with h5py.File(file_to, 'w') as F_hdf:
-        hdf = HDFDeepBunch(F_hdf, writeable = True, vpath = True)
+        hdf = HDFDeepBunch(F_hdf, writeable = True)
         hdf.update_recursive(diag_DB)
 
 
