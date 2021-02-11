@@ -375,9 +375,20 @@ class DiagAccess(object):
             self,
             fname,
     ):
+        # Parse the file
         raw = read_diaggui(fname)
         self.references = raw.references
         self.results    = raw.results
+        
+        # Add the reference traces to the externally-accessible results dict
+        # Channel naming convention follows the DTT convention: "CHN_NAME(REF#)"
+        for idx_ref, ref in self.references.items():
+            type_ref = ref['type_name']
+            if type_ref in ('PSD', 'CSD', 'COH', 'TF'):
+                chn_ref = '{}(REF{})'.format(ref['channelA'], idx_ref) 
+                if type_ref not in self.results:
+                    self.results[type_ref] = dict()
+                self.results[type_ref][chn_ref] = ref        
 
     def coherence(self, chn1, chn2):
         return DiagCoherenceHolder(self, chn1, chn2)
