@@ -3,6 +3,7 @@ venv/
 build/
 dist/
 site/
+tresults/
 
 TAGS
 .cache
