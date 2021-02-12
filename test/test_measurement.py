@@ -1,7 +1,9 @@
 import unittest
-import LIGODTT
 import pydarm
 import numpy as np
+
+import pydarm_measurement
+
 
 class TestGetRawTF(unittest.TestCase):
 
@@ -23,7 +25,7 @@ class TestGetRawTF(unittest.TestCase):
                             'DARM_OLGTF_LF_SS_5to1100Hz_15min.xml')
         channelA = 'H1:LSC-DARM1_IN2'
         channelB = 'H1:LSC-DARM1_IN1'
-        meas_object = pydarm.measurement.Measurement(measurement_file)
+        meas_object = pydarm_measurement.Measurement(measurement_file)
         freq, tf, coh, unc = meas_object.get_raw_tf(channelA, channelB)
 
         # Note: For some reason, the txt file is missing one frequency.
