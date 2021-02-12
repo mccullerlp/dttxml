@@ -46,8 +46,13 @@ def plot(request):
     return request.config.getvalue('--plot')
     return request.config.option.plot
 
+
 @pytest.fixture
 def tpath_preclear(request):
+    """
+    Fixture that indicates that the test path should be cleared automatically
+    before running each test. This cleans up the test data.
+    """
     tpath_raw = tpath_raw_make(request)
     no_preclear = request.config.getvalue('--no-preclear')
     if not no_preclear:
@@ -56,6 +61,10 @@ def tpath_preclear(request):
 
 @pytest.fixture
 def tpath(request):
+    """
+    Fixture that takes the value of the special test-specific folder for test
+    run data and plots. Usually the <folder of the test>/tresults/test_name/
+    """
     tpath_raw = tpath_raw_make(request)
 
     os.makedirs(tpath_raw, exist_ok = True)
@@ -64,37 +73,52 @@ def tpath(request):
 
 
 @pytest.fixture
+def tpath_join(request):
+    """
+    Fixture that joins subpaths to the value of the special test-specific folder for test
+    run data and plots. Usually the <folder of the test>/tresults/test_name/.
+
+    This function should be use like test_thing.save(tpath_join('output_file.png'))
+    """
+    tpath_raw = tpath_raw_make(request)
+    first_call = True
+
+    def tpath_joiner(*subpath):
+        nonlocal first_call
+        if first_call:
+            os.makedirs(tpath_raw, exist_ok = True)
+            os.utime(tpath_raw, None)
+            first_call = False
+        return path.join(tpath_raw, *subpath)
+
+    return tpath_joiner
+
+
+@pytest.fixture
 def fpath(request):
+    """
+    py.test fixture that returns the folder path of the test being run. Useful
+    for accessing data files.
+    """
     return fpath_raw_make(request)
 
 
 @pytest.fixture
 def fpath_join(request):
-    def jfunc(path):
-        return os.path.join(fpath_raw_make(request), path)
-    return jfunc
+    """
+    py.test fixture that runs os.path.join(path, *arguments) to merge subpaths
+    with the folder path of the current test being run. Useful for referring to
+    data files.
+    """
+    def join_func(*path):
+        return os.path.join(fpath_raw_make(request), *path)
+    return join_func
 
 @pytest.fixture
 def closefigs():
     import matplotlib.pyplot as plt
     yield
     plt.close('all')
-
-
-@pytest.fixture
-def tpath_join(request):
-    tpath_raw = tpath_raw_make(request)
-    first_call = True
-
-    def tpathJ(subpath):
-        nonlocal first_call
-        if first_call:
-            os.makedirs(tpath_raw, exist_ok = True)
-            os.utime(tpath_raw, None)
-            first_call = False
-        return path.join(tpath_raw, subpath)
-
-    return tpathJ
 
 
 @pytest.fixture
@@ -170,6 +194,14 @@ except ImportError:
 
 @pytest.fixture
 def pprint(request, tpath_join):
+    """
+    This is a fixture providing a wrapper function for pretty printing. It uses
+    the icecream module for pretty printing, falling back to ipythons pretty
+    printer if needed, then to the python build in pretty printing module.
+
+    Along with printing to stdout, this function prints into the tpath_folder to
+    save all output into output.txt.
+    """
     fname = tpath_join('output.txt')
 
     #pushes past the dot

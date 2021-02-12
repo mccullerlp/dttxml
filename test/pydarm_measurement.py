@@ -98,10 +98,6 @@ class Measurement(object):
             tf = tf[(coh > cohThresh)]
             unc = unc[(coh > cohThresh)]
             coh = coh[(coh > cohThresh)]
-            # Due to a convention used in LIGODTT, the transfer function is
-            # returned with the opposite phase. I correct this here, by
-            # taking the conjugate.
-            tf = np.conjugate(tf)
 
             return frequencies, tf, coh, unc
         else:

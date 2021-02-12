@@ -8,6 +8,8 @@ import re
 
 def parse_spectrum(LW_node):
     specbunch = Bunch()
+    specbunch.channelB = Bunch()
+    specbunch.channelB_inv = Bunch()
 
     for sparam in LW_node.findall('Time'):
         if sparam.attrib["Name"] == 't0':
@@ -55,7 +57,6 @@ def parse_spectrum(LW_node):
             specbunch.channelB[chn_num] = sparam.text
         else:
             pass
-
 
     chanB = specbunch.channelB
     sarg = np.argsort(list(chanB.keys()))
