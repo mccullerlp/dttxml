@@ -18,18 +18,19 @@ setup(
     author='Lee McCuller',
     author_email='Lee.McCuller@ligo.org',
     description=(
-        'Extract data from LIGO Diagnostics test tools XML format. Formerly dtt2hdf'
+        'Extract data from LIGO Diagnostics test tools XML format. Formerly dtt2hdf.'
     ),
     license = 'Apache v2',
     packages=find_packages(exclude=['doc']),
-    #include_package_data=True,
-    #scripts=[''],
+    extras_require   ={
+        "hdf" : ["h5py"],
+    },
+    tests_require=['pytest'],
     entry_points={
         'console_scripts': [
             'dtt2hdf=ligodtt.dtt2hdf:main',
         ]},
     cmdclass       = cmdclass,
-    extras_require = {},
     zip_safe       = True,
     keywords = 'LIGO dtt diagnostics file-reader',
     classifiers=[
@@ -40,4 +41,3 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
 )
-
