@@ -1,7 +1,6 @@
 import numpy as np
-import dtt2hdf
+import LIGODTT
 from os import path
-
 
 class Measurement(object):
     """
@@ -10,7 +9,7 @@ class Measurement(object):
     ProcessSensingMeasurement and ProcessActuationMeasurement
     class to get the input for the MCMC and GPR analysis.
 
-    This class uses the dtt2hdf module to import transfer functions and ASDs.
+    This class uses the LIGODTT module to import transfer functions and ASDs.
 
     Parameters
     ----------
@@ -38,7 +37,7 @@ class Measurement(object):
         # self.measurement = "sensing"
 
         # Data accessing object. It is called later.
-        self.data_access = dtt2hdf.DiagAccess(meas_file)
+        self.data_access = LIGODTT.DiagAccess(meas_file)
 
         # FIXME
         # For now, I can only access the averages and gps time from the
@@ -77,7 +76,7 @@ class Measurement(object):
         if (channelA in self.get_set_of_channels()) and\
            (channelB in self.get_set_of_channels()):
             # Transfer function data holder. xfer is a method that comes from
-            # dtt2hdf. xfer takes channelB first and channelA second, which
+            # LIGODTT. xfer takes channelB first and channelA second, which
             # is the opposite order that I am using. Whatever the ordering,
             # channelA always means the denominator and channelB is the
             # numerator.This should work for both Swept Sine
@@ -99,7 +98,7 @@ class Measurement(object):
             tf = tf[(coh > cohThresh)]
             unc = unc[(coh > cohThresh)]
             coh = coh[(coh > cohThresh)]
-            # Due to a convention used in dtt2hdf, the transfer function is
+            # Due to a convention used in LIGODTT, the transfer function is
             # returned with the opposite phase. I correct this here, by
             # taking the conjugate.
             tf = np.conjugate(tf)

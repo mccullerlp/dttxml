@@ -1,4 +1,4 @@
-import dtt2hdf
+import LIGODTT
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -7,7 +7,7 @@ meas_file = 'test_DTT_20_f_pts.xml'
 
 channelA = 'H1:PEM-EX_SEIS_VEA_FLOOR_Z_DQ'
 # channelA = 'H1:CAL-PCALX_TX_PD_OUT_DQ'
-data_access = dtt2hdf.DiagAccess(meas_file)
+data_access = LIGODTT.DiagAccess(meas_file)
 
 asd_holder = data_access.asd(channelA)
 
@@ -24,7 +24,7 @@ plt.show(block=True)
 meas_file_2 = 'test_DTT_21_f_pts.xml'
 channelA_2 = 'H1:PEM-EX_SEIS_VEA_FLOOR_Z_DQ'
 
-data_access_2 = dtt2hdf.DiagAccess(meas_file_2)
+data_access_2 = LIGODTT.DiagAccess(meas_file_2)
 asd_holder_2 = data_access_2.asd(channelA_2)
 
 freq_2 = asd_holder_2.FHz

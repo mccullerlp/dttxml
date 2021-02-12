@@ -1,5 +1,5 @@
 import unittest
-import dtt2hdf
+import LIGODTT
 import pydarm
 import numpy as np
 

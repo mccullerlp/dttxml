@@ -2,7 +2,6 @@
 """
 """
 from __future__ import division, print_function, unicode_literals
-from ..utilities.future_from_2 import repr_compat, object, str, unicode
 try:
     from collections.abc import Mapping as MappingABC
 except ImportError:
@@ -225,13 +224,12 @@ class DeepBunch(object):
         return cls(item)
 
     def __dir__(self):
-        items = [k for k in self._dict.keys() if isinstance(k, (str, unicode))]
+        items = [k for k in self._dict.keys() if isinstance(k, str)]
         items += ['mydict']
         #items.sort()
         #items += dir(super(Bunch, self))
         return items
 
-    @repr_compat
     def __repr__(self):
         if self._vpath is False:
             vpath = 'False'

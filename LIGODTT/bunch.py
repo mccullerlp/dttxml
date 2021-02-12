@@ -2,7 +2,6 @@
 """
 """
 from __future__ import (division, print_function, unicode_literals)
-from ..utilities.future_from_2 import str, object, dict, repr_compat, unicode
 
 try:
     from collections.abc import Mapping as MappingABC
@@ -66,7 +65,6 @@ class Bunch(object):
             return data
         return cls(data)
 
-    @repr_compat
     def __repr__(self):
         keys = list(self._mydict.keys())
         return '{0}({1})'.format(
