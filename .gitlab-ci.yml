@@ -1,4 +1,4 @@
-image: igwn:buster
+image: igwn/base:buster
 
 stages:
 - deploy
