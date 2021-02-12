@@ -14,8 +14,10 @@ pages:
   - pip3 install sphinx sphinx-rtd-theme
   #can this be less URL specific for anyone forking?
   #- git clone --single-branch -b inheritance https://gitlab-ci-token:${CI_JOB_TOKEN}@git.ligo.org/lee-mcculler/LIGODTT.git
+  - python3 -c "import LIGODTT;"
   - export PYTHONPATH="LIGODTT"
   - cd doc
+  - python3 -c "import LIGODTT;"
   - make html
   - cd ..
   - mv ./build/sphinx/html/* public/
