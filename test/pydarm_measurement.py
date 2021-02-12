@@ -1,5 +1,5 @@
 import numpy as np
-import LIGODTT
+import ligodtt
 from os import path
 
 class Measurement(object):
@@ -9,7 +9,7 @@ class Measurement(object):
     ProcessSensingMeasurement and ProcessActuationMeasurement
     class to get the input for the MCMC and GPR analysis.
 
-    This class uses the LIGODTT module to import transfer functions and ASDs.
+    This class uses the ligodtt module to import transfer functions and ASDs.
 
     Parameters
     ----------
@@ -37,7 +37,7 @@ class Measurement(object):
         # self.measurement = "sensing"
 
         # Data accessing object. It is called later.
-        self.data_access = LIGODTT.DiagAccess(meas_file)
+        self.data_access = ligodtt.DiagAccess(meas_file)
 
         # FIXME
         # For now, I can only access the averages and gps time from the
@@ -76,7 +76,7 @@ class Measurement(object):
         if (channelA in self.get_set_of_channels()) and\
            (channelB in self.get_set_of_channels()):
             # Transfer function data holder. xfer is a method that comes from
-            # LIGODTT. xfer takes channelB first and channelA second, which
+            # ligodtt. xfer takes channelB first and channelA second, which
             # is the opposite order that I am using. Whatever the ordering,
             # channelA always means the denominator and channelB is the
             # numerator.This should work for both Swept Sine

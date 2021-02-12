@@ -1,6 +1,6 @@
 .. _index:
 
-LIGODTT
+ligodtt
 ====================================================
 
 
@@ -8,13 +8,13 @@ LIGODTT
 Requirements
 -------------
 
-.. autofunction:: LIGODTT.dtt_read
+.. autofunction:: ligodtt.dtt_read
    :members:
    :private-members:
    :special-members:
 
 
-.. autoclass:: LIGODTT.DiagAccess
+.. autoclass:: ligodtt.DiagAccess
    :members:
    :private-members:
    :special-members:

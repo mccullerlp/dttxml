@@ -8,11 +8,11 @@ import setup_helper
 from setuptools import find_packages, setup
 
 version = '1.1.0'
-cmdclass = setup_helper.version_checker(version, 'LIGODTT')
+cmdclass = setup_helper.version_checker(version, 'ligodtt')
 
 
 setup(
-    name='LIGODTT',
+    name='ligodtt',
     version=version,
     url='',
     author='Lee McCuller',
@@ -26,7 +26,7 @@ setup(
     #scripts=[''],
     entry_points={
         'console_scripts': [
-            'dtt2hdf=LIGODTT.dtt2hdf:main',
+            'dtt2hdf=ligodtt.dtt2hdf:main',
         ]},
     cmdclass       = cmdclass,
     extras_require = {},

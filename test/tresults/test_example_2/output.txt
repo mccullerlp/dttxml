@@ -1,6 +1,0 @@
-'----------------------------------------------------'
-'Other information in measurement file: ' '/home/mcculler/local/projects_sync/transient/GWcode/LIGODTT/test/data/2019-03-27_H1DARM_OLGTF_BB.xml'
-'GPS of measurement is ' 1237754265.0
-'Navg of measurement is ' 30
-'Channels in measurement file are:' {'H1:LSC-DARM1_EXC', 'H1:LSC-DARM1_IN1', 'H1:LSC-DARM1_IN2'}
-'----------------------------------------------------'
