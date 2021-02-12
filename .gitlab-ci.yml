@@ -1,0 +1,28 @@
+image: ligo/software:stretch
+
+stages:
+- deploy
+
+
+pages:
+  stage: deploy
+  script:
+  - mkdir public
+  - apt-get install -y -qq python3-pip python3-dev make
+  - apt-get update -qq
+  - apt-get install -y -qq python3-yaml python3-scipy python3-matplotlib python3-ipython lalsimulation-python3
+  - pip3 install sphinx sphinx-rtd-theme
+  - git clone https://gitlab-ci-token:ci_token@git.ligo.org/gwinc/inspiral_range.git
+  - git clone --single-branch -b inheritance https://gitlab-ci-token:${CI_JOB_TOKEN}@git.ligo.org/lee-mcculler/pygwinc.git
+  - export PYTHONPATH="inspiral_range:pygwinc"
+  - cd docs
+  - make html
+  - cd ..
+  - mv ./build/sphinx/html/* public/
+
+  artifacts:
+    paths:
+    - public
+    expire_in: 4w
+  only:
+  - master
