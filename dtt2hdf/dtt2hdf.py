@@ -9,10 +9,10 @@ import argparse
 import os.path as path
 
 import h5py
-from declarative.bunch.hdf_deep_bunch import HDFDeepBunch
+from .declarative.hdf_deep_bunch import HDFDeepBunch
 
-#from dtt2hdf.normalizer import DiagToDictNormalizer
-from .normalizer import DiagToDictNormalizer
+from .dtt2bunch import dtt2bunch
+
 
 def main(args = None):
     parser = argparse.ArgumentParser(
@@ -64,22 +64,12 @@ def main(args = None):
     #    help='Exclude Channels'
     #)
 
-    reader = DiagToDictNormalizer(
-        verbose = not args.quiet,
-    )
-    diag_DB = reader.read(fpath = args.file_from)
+    diag_DB = dtt2bunch(fpath = args.file_from, verbose = not args.quiet)
 
     #write the file out, it is cleared first due to the 'w' flag. Could do this using append operations with 'a'
     with h5py.File(file_to, 'w') as F_hdf:
         hdf = HDFDeepBunch(F_hdf, writeable = True)
         hdf.update_recursive(diag_DB)
-
-
-def diag_to_bunch(fname, verbose = False):
-    reader = DiagToDictNormalizer(
-        verbose = verbose,
-    )
-    return reader.read(fname)
 
 
 if __name__ == '__main__':
