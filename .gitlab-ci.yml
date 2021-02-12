@@ -12,8 +12,8 @@ pages:
   - apt-get update -qq
   - apt-get install -y -qq python3-scipy python3-matplotlib python3-ipython 
   - pip3 install sphinx sphinx-rtd-theme
-    #can this be less URL specific for anyone forking?
-  - git clone --single-branch -b inheritance https://gitlab-ci-token:${CI_JOB_TOKEN}@git.ligo.org/lee-mcculler/LIGODTT.git
+  #can this be less URL specific for anyone forking?
+  #- git clone --single-branch -b inheritance https://gitlab-ci-token:${CI_JOB_TOKEN}@git.ligo.org/lee-mcculler/LIGODTT.git
   - export PYTHONPATH="LIGODTT"
   - cd doc
   - make html
