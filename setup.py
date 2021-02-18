@@ -8,11 +8,11 @@ import setup_helper
 from setuptools import find_packages, setup
 
 version = '1.1.0'
-cmdclass = setup_helper.version_checker(version, 'ligodtt')
+cmdclass = setup_helper.version_checker(version, 'dttxml')
 
 
 setup(
-    name='ligodtt',
+    name='dttxml',
     version=version,
     url='',
     author='Lee McCuller',
@@ -28,7 +28,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'dtt2hdf=ligodtt.dtt2hdf:main',
+            'dtt2hdf=dttxml.dtt2hdf:main',
         ]},
     cmdclass       = cmdclass,
     zip_safe       = True,

@@ -7,7 +7,7 @@ from .parse import dtt_read
 class DiagMeasurementHolder(object):
     _copy_elements = ('gps_second', 'window', 'averages', 'BW')
 
-    gps_second    = None
+    gps_second  = None
     window      = None
     averages    = None
     BW          = None
@@ -370,6 +370,9 @@ class DiagHarmonicResponseCoefficients(DiagMeasurementHolder):
 
 
 class DiagAccess(object):
+    """
+    Test watch
+    """
     def __init__(
             self,
             fname,

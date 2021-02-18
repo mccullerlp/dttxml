@@ -1,23 +1,22 @@
 .. _index:
 
-ligodtt
+dttxml
 ====================================================
 
 
 
-Requirements
+API
 -------------
 
-.. autofunction:: ligodtt.dtt_read
-   :members:
-   :private-members:
-   :special-members:
+.. autofunction:: dttxml.dtt_read
 
 
-.. autoclass:: ligodtt.DiagAccess
-   :members:
-   :private-members:
-   :special-members:
+.. autoclass:: dttxml.DiagAccess
+    :members:
+    :undoc-members:
+    :private-members:
+    :exclude-members:
+
 
 Contents
 ------------

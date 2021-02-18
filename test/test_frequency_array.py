@@ -1,4 +1,4 @@
-import ligodtt
+import dttxml
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,7 +8,7 @@ def test_frequency_array1(fpath_join, tpath_join, plot):
 
     channelA = 'H1:PEM-EX_SEIS_VEA_FLOOR_Z_DQ'
     # channelA = 'H1:CAL-PCALX_TX_PD_OUT_DQ'
-    data_access = ligodtt.DiagAccess(meas_file)
+    data_access = dttxml.DiagAccess(meas_file)
 
     asd_holder = data_access.asd(channelA)
 
@@ -32,7 +32,7 @@ def test_frequency_array2(fpath_join, tpath_join, plot, pprint):
     meas_file_2 = fpath_join('data', 'test_DTT_21_f_pts.xml')
     channelA_2 = 'H1:PEM-EX_SEIS_VEA_FLOOR_Z_DQ'
 
-    data_access_2 = ligodtt.DiagAccess(meas_file_2)
+    data_access_2 = dttxml.DiagAccess(meas_file_2)
     asd_holder_2 = data_access_2.asd(channelA_2)
 
     freq_2 = asd_holder_2.FHz

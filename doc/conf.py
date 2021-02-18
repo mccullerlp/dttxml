@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# ligodtt documentation build configuration file, created by
+# dttxml documentation build configuration file, created by
 # sphinx-quickstart on Sat Jul 15 21:40:50 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -53,7 +53,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'ligodtt'
+project = 'dttxml'
 copyright = '2021, Lee McCuller'
 author = 'McCuller'
 
@@ -87,8 +87,8 @@ todo_include_todos = True
 
 # -- Options for sourcelinks
 
-srclink_project = 'https://github.com/mccullerlp/ligodtt'
-srclink_src_path = 'ligodtt'
+srclink_project = 'https://github.com/mccullerlp/dttxml'
+srclink_src_path = 'dttxml'
 srclink_branch = 'master'
 
 # -- Options for HTML output ----------------------------------------------
@@ -154,7 +154,7 @@ html_sidebars = {
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'ligodtt'
+htmlhelp_basename = 'dttxml'
 
 html_logo = 'logo/LIGO_F0900035-v1.jpg'
 

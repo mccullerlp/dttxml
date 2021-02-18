@@ -41,7 +41,7 @@ clean:
 	-rm -rf $(BUILDDIR)/*
 
 livehtml:
-	sphinx-autobuild -i .#* -i *.pyc -i .*.swp -i .*.swo -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+	sphinx-autobuild -z ../dttxml -i '*.#*' -i '*.pyc' -i '*.swp' -i '*.swo' -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
